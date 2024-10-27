@@ -3,7 +3,7 @@ import Image from "next/image";
 import React, { useEffect } from "react";
 import LOGO from "../../../public/logo.svg";
 import { FileClock, History, Home, Settings } from "lucide-react";
-import { useParams, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const SideNav = () => {
   const params = usePathname();
