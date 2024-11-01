@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import LOGO from "../../../public/logo.svg";
 import { FileClock, History, Home, Settings } from "lucide-react";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 const SideNav = () => {
   const params = usePathname();
@@ -31,20 +32,22 @@ const SideNav = () => {
   ];
   useEffect(() => {}, []);
   return (
-    <div className="h-screen p-5 shadow-sm border">
+    <div className="h-screen p-5 shadow-sm border bg-white">
       <div className="flex justify-center">
         <Image src={LOGO} width={120} height={100} alt="logo" />
       </div>
       <div className="mt-10">
         {MenuList.map((ele, i) => (
-          <div
-            className={`flex items-center gap-2 mb-2 p-3 hover:bg-primary hover:text-white rounded-lg cursor-pointer ${
-              params === ele.path && "bg-primary text-white"
-            }`}
-          >
-            <ele.icon className="h-7 w-7" />
-            <h2>{ele.name}</h2>
-          </div>
+          <Link href={ele.path}>
+            <div
+              className={`flex items-center gap-2 mb-2 p-3 hover:bg-primary hover:text-white rounded-lg cursor-pointer ${
+                params === ele.path && "bg-primary text-white"
+              }`}
+            >
+              <ele.icon className="h-7 w-7" />
+              <h2>{ele.name}</h2>
+            </div>
+          </Link>
         ))}
       </div>
     </div>
