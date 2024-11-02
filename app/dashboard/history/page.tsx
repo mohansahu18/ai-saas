@@ -9,7 +9,7 @@ import { AIOutput } from "@/app/utils/schema";
 
 export interface HISTORY {
   id: number;
-  formData: string; // Corrected from 'formateData' to 'formData'
+  formData: string;
   aiResponse: string;
   templateSlug: string;
   createdBy: string;

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import FormSection from "../_components/FormSection";
 import OutputSection from "../_components/OutputSection";
 import Template from "@/app/(data)/Template";
@@ -11,6 +11,8 @@ import { chatSession } from "@/app/utils/AiModel";
 import { db } from "@/app/utils/DB";
 import { AIOutput } from "@/app/utils/schema";
 import { useUser } from "@clerk/nextjs";
+import { TotalUsageContext } from "@/app/(context)/TotalUsageContext";
+import { useRouter } from "next/navigation";
 
 interface PROPS {
   params: {
@@ -27,8 +29,14 @@ const CreateNewContent = (props: PROPS) => {
     (item) => item?.slug === props?.params["template-slug"]
   );
   console.log("render...........");
-
+  const { totalUsage } = useContext(TotalUsageContext);
+  const router = useRouter();
   const generateAiContent = async (formData: any) => {
+    if (totalUsage >= 10000) {
+      alert("You have reached the maximum limit of 10000 characters");
+      router.push("/dashboard/billing");
+      return;
+    }
     try {
       setLoading(true);
       console.log("content generated", formData);
