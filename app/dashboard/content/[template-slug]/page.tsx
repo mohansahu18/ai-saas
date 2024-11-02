@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import FormSection from "../_components/FormSection";
 import OutputSection from "../_components/OutputSection";
 import Template from "@/app/(data)/Template";
@@ -8,6 +8,11 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { chatSession } from "@/app/utils/AiModel";
+import { db } from "@/app/utils/DB";
+import { AIOutput } from "@/app/utils/schema";
+import { useUser } from "@clerk/nextjs";
+import { TotalUsageContext } from "@/app/(context)/TotalUsageContext";
+import { useRouter } from "next/navigation";
 
 interface PROPS {
   params: {
@@ -18,13 +23,20 @@ interface PROPS {
 const CreateNewContent = (props: PROPS) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [aiOutput, setAiOutput] = useState<string>("");
+  const { user } = useUser();
 
   const selectedTemplate: TEMPLATE | undefined = Template?.find(
     (item) => item?.slug === props?.params["template-slug"]
   );
   console.log("render...........");
-
+  const { totalUsage } = useContext(TotalUsageContext);
+  const router = useRouter();
   const generateAiContent = async (formData: any) => {
+    if (totalUsage >= 10000) {
+      alert("You have reached the maximum limit of 10000 characters");
+      router.push("/dashboard/billing");
+      return;
+    }
     try {
       setLoading(true);
       console.log("content generated", formData);
@@ -33,6 +45,7 @@ const CreateNewContent = (props: PROPS) => {
       const result = await chatSession.sendMessage(finalAiPrompt);
       console.log(result.response.text());
       setAiOutput(result.response.text());
+      await saveInDb(formData, selectedTemplate?.slug, result.response.text());
     } catch (error) {
       console.log(error);
       throw error;
@@ -41,6 +54,19 @@ const CreateNewContent = (props: PROPS) => {
     }
   };
 
+  const saveInDb = async (fromData: any, slug: any, aiResp: string) => {
+    try {
+      const result = await db.insert(AIOutput).values({
+        formData: fromData,
+        templateSlug: slug,
+        aiResponse: aiResp,
+        createdBy: user?.primaryEmailAddress?.emailAddress,
+      });
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="p-10">
       <Link href="/dashboard/">

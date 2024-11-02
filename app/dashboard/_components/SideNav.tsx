@@ -5,6 +5,7 @@ import LOGO from "../../../public/logo.svg";
 import { FileClock, History, Home, Settings } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import UsageTrack from "./UsageTrack";
 
 const SideNav = () => {
   const params = usePathname();
@@ -32,7 +33,7 @@ const SideNav = () => {
   ];
   useEffect(() => {}, []);
   return (
-    <div className="h-screen p-5 shadow-sm border bg-white">
+    <div className="h-screen p-5 shadow-sm border bg-white relative">
       <div className="flex justify-center">
         <Image src={LOGO} width={120} height={100} alt="logo" />
       </div>
@@ -49,6 +50,9 @@ const SideNav = () => {
             </div>
           </Link>
         ))}
+      </div>
+      <div className="absolute bottom-10 left-0  w-full">
+        <UsageTrack />
       </div>
     </div>
   );
