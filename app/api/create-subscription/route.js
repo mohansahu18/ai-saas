@@ -11,7 +11,7 @@ export async function POST(req, res) {
     });
 
     const result = await instance.subscriptions.create({
-        plan_id: process.env.SUBSCRIPTION_PRICE_ID,
+        plan_id: process.env.NEXT_PUBLIC_SUBSCRIPTION_PRICE_ID,
         customer_notify: 1,
         quantity: 1,
         total_count: 1,

@@ -9,6 +9,7 @@ import { eq } from "drizzle-orm";
 import { TotalUsageContext } from "@/app/(context)/TotalUsageContext";
 import { UserSubscriptionContext } from "@/app/(context)/UserSubscriptionContext";
 import { UpdateCreditUsageContext } from "@/app/(context)/UpdateCreditUsageContext";
+import { useRouter } from "next/navigation";
 
 const UsageTrack = () => {
   const { user } = useUser();
@@ -20,6 +21,7 @@ const UsageTrack = () => {
     UpdateCreditUsageContext
   );
   const [maxWords, setMaxWords] = useState<number>(10000);
+  const router = useRouter();
 
   useEffect(() => {
     user && getData();
@@ -81,7 +83,11 @@ const UsageTrack = () => {
           {totalUsage} /{maxWords} Credits used
         </h2>
       </div>
-      <Button variant={"secondary"} className="w-full my-3 text-primary ">
+      <Button
+        onClick={() => router.push("/dashboard/billing")}
+        variant={"secondary"}
+        className="w-full my-3 text-primary "
+      >
         Upgrade
       </Button>
     </div>
