@@ -8,6 +8,7 @@ import { HISTORY } from "../history/page";
 import { eq } from "drizzle-orm";
 import { TotalUsageContext } from "@/app/(context)/TotalUsageContext";
 import { UserSubscriptionContext } from "@/app/(context)/UserSubscriptionContext";
+import { UpdateCreditUsageContext } from "@/app/(context)/UpdateCreditUsageContext";
 
 const UsageTrack = () => {
   const { user } = useUser();
@@ -15,12 +16,18 @@ const UsageTrack = () => {
   const { userSubscription, setUserSubscription } = useContext(
     UserSubscriptionContext
   );
+  const { updateCreditUsage, setUpdateCreditUsage } = useContext(
+    UpdateCreditUsageContext
+  );
   const [maxWords, setMaxWords] = useState<number>(10000);
+
   useEffect(() => {
     user && getData();
     user && isUserSubscribed();
   }, [user]);
-
+  useEffect(() => {
+    user && getData();
+  }, [updateCreditUsage]);
   const getData = async () => {
     try {
       const result: HISTORY[] = await db
@@ -43,7 +50,6 @@ const UsageTrack = () => {
   };
 
   const isUserSubscribed = async () => {
-    debugger;
     try {
       const result = await db
         .select()
@@ -66,7 +72,7 @@ const UsageTrack = () => {
         <div className="h-2 rounded-full w-full bg-[#9981f9] mt-3">
           <div
             style={{
-              width: (totalUsage / 10000) * 100 + "%",
+              width: (totalUsage / maxWords) * 100 + "%",
             }}
             className="h-2 rounded-full bg-white "
           ></div>

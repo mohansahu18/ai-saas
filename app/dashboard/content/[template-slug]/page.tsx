@@ -14,6 +14,7 @@ import { useUser } from "@clerk/nextjs";
 import { TotalUsageContext } from "@/app/(context)/TotalUsageContext";
 import { useRouter } from "next/navigation";
 import { UserSubscriptionContext } from "@/app/(context)/UserSubscriptionContext";
+import { UpdateCreditUsageContext } from "@/app/(context)/UpdateCreditUsageContext";
 
 interface PROPS {
   params: {
@@ -32,7 +33,12 @@ const CreateNewContent = (props: PROPS) => {
   console.log("render...........");
   const { totalUsage } = useContext(TotalUsageContext);
   const { userSubscription } = useContext(UserSubscriptionContext);
+  const { updateCreditUsage, setUpdateCreditUsage } = useContext(
+    UpdateCreditUsageContext
+  );
+
   const router = useRouter();
+
   const generateAiContent = async (formData: any) => {
     if (totalUsage >= 10000 && !userSubscription) {
       alert("You have reached the maximum limit of 10000 characters");
@@ -48,6 +54,7 @@ const CreateNewContent = (props: PROPS) => {
       console.log(result.response.text());
       setAiOutput(result.response.text());
       await saveInDb(formData, selectedTemplate?.slug, result.response.text());
+      setUpdateCreditUsage(Date.now());
     } catch (error) {
       console.log(error);
       throw error;
