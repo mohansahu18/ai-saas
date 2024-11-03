@@ -13,6 +13,7 @@ import { AIOutput } from "@/app/utils/schema";
 import { useUser } from "@clerk/nextjs";
 import { TotalUsageContext } from "@/app/(context)/TotalUsageContext";
 import { useRouter } from "next/navigation";
+import { UserSubscriptionContext } from "@/app/(context)/UserSubscriptionContext";
 
 interface PROPS {
   params: {
@@ -30,9 +31,10 @@ const CreateNewContent = (props: PROPS) => {
   );
   console.log("render...........");
   const { totalUsage } = useContext(TotalUsageContext);
+  const { userSubscription } = useContext(UserSubscriptionContext);
   const router = useRouter();
   const generateAiContent = async (formData: any) => {
-    if (totalUsage >= 10000) {
+    if (totalUsage >= 10000 && !userSubscription) {
       alert("You have reached the maximum limit of 10000 characters");
       router.push("/dashboard/billing");
       return;
