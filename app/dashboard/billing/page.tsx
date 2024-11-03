@@ -27,7 +27,7 @@ const Billing = () => {
     try {
       setIsLoading(true);
       const response = await axios.post("/api/create-subscription/", {});
-      console.log(response, "llllllllllllllllllllll");
+      console.log(response.data?.id, "llllllllllllllllllllll");
       OnPayment(response?.data?.id);
     } catch (error: any) {
       console.log({ msg: error });
@@ -43,7 +43,7 @@ const Billing = () => {
       }
       const options = {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-        "subscript ion_id": subId,
+        subscription_id: subId,
         name: "AI  Content Generator",
         description: "Monthly Subscription",
         handler: async function (response: any) {
