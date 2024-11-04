@@ -39,7 +39,7 @@ const SideNav = () => {
       </div>
       <div className="mt-10">
         {MenuList.map((ele, i) => (
-          <Link href={ele.path}>
+          <Link key={i} href={ele.path}>
             <div
               className={`flex items-center gap-2 mb-2 p-3 hover:bg-primary hover:text-white rounded-lg cursor-pointer ${
                 params === ele.path && "bg-primary text-white"

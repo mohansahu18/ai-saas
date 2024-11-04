@@ -79,12 +79,12 @@ const Billing = () => {
   };
   return (
     <div className="flex flex-col items-center justify-center h-[88vh]">
-      <div className="my-4">
-        <h1 className="text-3xl font-bold">Upgrade With Monthly plan</h1>
+      <div className="my-4 ">
+        <h1 className="text-3xl font-bold pb-10">Upgrade With Monthly plan</h1>
       </div>
 
       <div className="flex gap-8">
-        <div className="border border-[#D88095] bg-white p-8 rounded-md">
+        <div className="border border-[#7f72d3] bg-white p-8 rounded-md">
           <div className="flex w-full justify-center mb-1">
             <h2 className="text-3xl flex items-center font-bold">Free</h2>
           </div>
@@ -96,11 +96,11 @@ const Billing = () => {
 
           <div className="p-2 flex flex-col items-start justify-center">
             <h1 className="py-1 text-[16px] font-medium">
-              ✔ 1,00,000 Words/Month
+              ✔ 10,000 Words/Month
             </h1>
 
             <h1 className="py-1 text-[16px] font-medium">
-              ✔ 50+ Template Access
+              ✔ 25+ Template Access
             </h1>
 
             <h1 className="py-1 text-[16px] font-medium">
@@ -112,18 +112,18 @@ const Billing = () => {
             </h1>
           </div>
 
-          <Button className="w-full cursor-not-allowed bg-white border border-[#D88095] text-[#D88095] rounded-md">
+          <Button className="w-full cursor-not-allowed hover:bg-white bg-white border border-[#7f72d3] text-[#7f72d3] rounded-md">
             Free Tier
           </Button>
         </div>
 
-        <div className="border border-[#D88095] bg-white p-8 rounded-md">
+        <div className="border border-[#7f72d3] bg-white p-8 rounded-md">
           <div className="flex w-full justify-center mb-1">
             <h2 className="text-3xl flex items-center font-bold">Monthly</h2>
           </div>
 
           <div className="flex gap-1 w-full justify-center">
-            <h1 className="text-4xl my-2 font-medium">₹999</h1>
+            <h1 className="text-4xl my-2 font-medium">₹300</h1>
             <h3 className="mt-6 my-2 font-medium">/month</h3>
           </div>
 
