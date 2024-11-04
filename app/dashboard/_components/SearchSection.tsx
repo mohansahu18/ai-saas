@@ -8,7 +8,7 @@ function SearchSection({ onSearchInput }: any) {
       <h2 className="text-white text-3xl font-bold">Brows All Templates</h2>
       <p className="text-white">What would you like to create today?</p>
       <div className="w-full flex items-center justify-center">
-        <div className="flex gap-2 items-center border rounded-md p-2 mh-2 bg-white my-3 w-[50%]">
+        <div className="flex gap-2 items-center border rounded-md p-2 mh-2 bg-white my-3 w-[100%] md:w-[50%]">
           <Search className="text-[#d88095]" />
           <input
             type="text"

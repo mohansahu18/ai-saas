@@ -11,7 +11,7 @@ import { UserSubscriptionContext } from "@/app/(context)/UserSubscriptionContext
 import { UpdateCreditUsageContext } from "@/app/(context)/UpdateCreditUsageContext";
 import { useRouter } from "next/navigation";
 
-const UsageTrack = () => {
+const UsageTrack = ({ onItemClick }: any) => {
   const { user } = useUser();
   const { totalUsage, setTotalUsage } = useContext(TotalUsageContext);
   const { userSubscription, setUserSubscription } = useContext(
@@ -84,7 +84,15 @@ const UsageTrack = () => {
         </h2>
       </div>
       <Button
-        onClick={() => router.push("/dashboard/billing")}
+        // onClick={() => {
+        onClick={(e) => {
+          if (window.innerWidth < 768) {
+            onItemClick?.();
+          }
+          router.push("/dashboard/billing");
+        }}
+        // }
+        // }
         variant={"secondary"}
         className="w-full my-3 text-primary "
       >
