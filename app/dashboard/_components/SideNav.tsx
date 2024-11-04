@@ -7,7 +7,11 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import UsageTrack from "./UsageTrack";
 
-const SideNav = () => {
+interface PROPS {
+  onItemClick?: () => void;
+}
+
+const SideNav = ({ onItemClick }: PROPS) => {
   const params = usePathname();
   const MenuList = [
     {
@@ -39,7 +43,15 @@ const SideNav = () => {
       </div>
       <div className="mt-10">
         {MenuList.map((ele, i) => (
-          <Link key={i} href={ele.path}>
+          <Link
+            onClick={(e) => {
+              if (window.innerWidth < 768) {
+                onItemClick?.();
+              }
+            }}
+            key={i}
+            href={ele.path}
+          >
             <div
               className={`flex items-center gap-2 mb-2 p-3 hover:bg-primary hover:text-white rounded-lg cursor-pointer ${
                 params === ele.path && "bg-primary text-white"
@@ -52,7 +64,7 @@ const SideNav = () => {
         ))}
       </div>
       <div className="absolute bottom-10 left-0  w-full">
-        <UsageTrack />
+        <UsageTrack onItemClick={onItemClick} />
       </div>
     </div>
   );

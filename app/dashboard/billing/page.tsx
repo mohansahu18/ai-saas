@@ -78,12 +78,14 @@ const Billing = () => {
     }
   };
   return (
-    <div className="flex flex-col items-center justify-center h-[88vh]">
-      <div className="my-4 ">
-        <h1 className="text-3xl font-bold pb-10">Upgrade With Monthly plan</h1>
+    <div className="flex flex-col  items-center justify-center md:h-[88vh]">
+      <div className="md:my-4 ">
+        <h1 className="text-3xl font-bold my-9 px-1 md:pb-10">
+          Upgrade With Monthly plan
+        </h1>
       </div>
 
-      <div className="flex gap-8">
+      <div className="flex md:flex-row flex-col gap-4 lg:gap-16">
         <div className="border border-[#7f72d3] bg-white p-8 rounded-md">
           <div className="flex w-full justify-center mb-1">
             <h2 className="text-3xl flex items-center font-bold">Free</h2>
@@ -144,14 +146,6 @@ const Billing = () => {
               ✔ 1 Year of History
             </h1>
           </div>
-
-          {/* {userSubscription == true ? (
-            <Button className="w-full" onClick={checkoutButton}>
-              Your Plan is activated
-            </Button>
-          ) : (
-          
-          )} */}
           <Button
             disabled={isLoading}
             className="w-full"
