@@ -38,7 +38,7 @@ function TemplateListSection({ searchInput }: any) {
     <div className="m-2 rounded-md grid grid-cols-4 md:grid-col-3 lg:grid-col-4 gap-5 ">
       {templateList.length > 0 ? (
         templateList.map((item: TEMPLATE, index: number) => (
-          <TemplateCard {...item} />
+          <TemplateCard key={index} {...item} />
         ))
       ) : (
         <h1 className="col-span-full flex justify-center items-center h-64 text-2xl">
