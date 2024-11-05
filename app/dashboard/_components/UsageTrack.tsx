@@ -43,6 +43,7 @@ const UsageTrack = ({ onItemClick }: any) => {
   };
 
   const getTotalUsage = (result: HISTORY[]) => {
+    debugger;
     let total: number = 0;
     result.forEach((ele) => {
       total += Number(ele.aiResponse?.length);
@@ -59,7 +60,7 @@ const UsageTrack = ({ onItemClick }: any) => {
         .where(
           eq(UserSubscription.email, user?.primaryEmailAddress?.emailAddress)
         );
-      if (result) {
+      if (result.length > 0) {
         setUserSubscription(true);
         setMaxWords(1000000);
       }

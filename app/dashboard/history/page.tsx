@@ -50,30 +50,62 @@ const History = () => {
   if (loading) {
     return <div>Loading...</div>;
   }
+  const truncateText = (text, maxWords = 20) => {
+    const words = text.split(" ");
+    if (words.length <= maxWords) {
+      return text;
+    }
+    return `${words.slice(0, maxWords).join(" ")}...`;
+  };
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString();
+  };
+  const getWordCount = (text) => {
+    return text.split(" ").length;
+  };
+  console.log(historyList, "historyList");
 
   return (
-    <div className="m-2 p-5 border rounded-md bg-white">
+    <div className="m-2 p-5 rounded-md bg-white border">
       <h2 className="font-bold">History</h2>
-      {historyList.map((item) => (
-        <div key={item.id} className="mb-4">
-          <h3 className="font-semibold">
-            {GetTemplateName(item.templateSlug)}
-          </h3>
-          <p>
-            <strong>Form Data:</strong>{" "}
-            {JSON.parse(item.formData).outline || "N/A"}
-          </p>{" "}
-          {/* Displaying outline if present */}
-          <p>
-            <strong>AI Response:</strong> {item.aiResponse}
-          </p>
-          <p>
-            <small>
-              <em>Created at: {new Date(item.createdAt).toLocaleString()}</em>
-            </small>
-          </p>
+      {historyList.length > 0 ? (
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse">
+            <thead>
+              <tr>
+                <th className="p-2 border text-left">Template</th>
+                <th className="p-2 border text-left">Form Data</th>
+                <th className="p-2 border text-left">AI Response</th>
+                <th className="p-2 border text-left">Word Count</th>
+                <th className="p-2 border text-left">Created At</th>
+              </tr>
+            </thead>
+            <tbody>
+              {historyList.map((item) => (
+                <tr key={item.id} className="mb-4">
+                  <td className="p-2 border font-medium">
+                    {GetTemplateName(item.templateSlug)}
+                  </td>
+                  <td className="p-2 border">
+                    {JSON.parse(item.formData).niche || "N/A"}
+                  </td>
+                  <td className="p-2 border max-w-[300px] truncate">
+                    {truncateText(item.aiResponse, 20)}
+                  </td>
+                  <td className="p-2 border">
+                    {getWordCount(item.aiResponse)}
+                  </td>
+                  <td className="p-2 border">{formatDate(item.createdAt)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-      ))}
+      ) : (
+        <p className="text-center text-gray-500">No history found</p>
+      )}
     </div>
   );
 };
