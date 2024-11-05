@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { useEffect } from "react";
-import LOGO from "../../../public/logo.svg";
+import LOGO from "../../../public/logo.png";
 import { FileClock, History, Home, Settings } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -39,7 +39,7 @@ const SideNav = ({ onItemClick }: PROPS) => {
   return (
     <div className="h-screen p-5 shadow-sm border bg-white relative">
       <div className="flex justify-center">
-        <Image src={LOGO} width={120} height={100} alt="logo" />
+        <Image src={LOGO} width={60} height={50} alt="logo" />
       </div>
       <div className="mt-10">
         {MenuList.map((ele, i) => (
