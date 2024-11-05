@@ -14,7 +14,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 
-export function Home() {
+const Home = () => {
   const features = [
     {
       id: 1,
@@ -203,7 +203,7 @@ export function Home() {
       </div>
     </div>
   );
-}
+};
 
 // Add a Stats Section Component
 const StatsSection = () => {
