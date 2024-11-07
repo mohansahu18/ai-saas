@@ -13,7 +13,7 @@ export interface HISTORY {
   aiResponse: string | null;
   templateSlug: string;
   createdBy: string;
-  createdAt: string | null;
+  createdAt: Date | null;
 }
 
 const History = () => {
