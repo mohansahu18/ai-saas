@@ -43,7 +43,7 @@ const UsageTrack = ({ onItemClick }: any) => {
   };
 
   const getTotalUsage = (result: HISTORY[]) => {
-    debugger;
+    // debugger;
     let total: number = 0;
     result.forEach((ele) => {
       total += Number(ele.aiResponse?.length);
@@ -54,15 +54,16 @@ const UsageTrack = ({ onItemClick }: any) => {
 
   const isUserSubscribed = async () => {
     try {
-      const result = await db
-        .select()
-        .from(UserSubscription)
-        .where(
-          eq(UserSubscription.email, user?.primaryEmailAddress?.emailAddress)
-        );
-      if (result.length > 0) {
-        setUserSubscription(true);
-        setMaxWords(1000000);
+      const userEmail = user?.primaryEmailAddress?.emailAddress;
+      if (userEmail) {
+        const result = await db
+          .select()
+          .from(UserSubscription)
+          .where(eq(UserSubscription.email, userEmail));
+        if (result.length > 0) {
+          setUserSubscription(true);
+          setMaxWords(1000000);
+        }
       }
     } catch (error) {
       console.log(error);
