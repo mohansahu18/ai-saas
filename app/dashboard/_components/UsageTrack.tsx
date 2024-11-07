@@ -32,10 +32,15 @@ const UsageTrack = ({ onItemClick }: any) => {
   }, [updateCreditUsage]);
   const getData = async () => {
     try {
+      const userEmail = user?.primaryEmailAddress?.emailAddress;
+      if (!userEmail) {
+        console.error("User email is not available.");
+        return; // Exit if no email is available
+      }
       const result: HISTORY[] = await db
         .select()
         .from(AIOutput)
-        .where(eq(AIOutput.createdBy, user?.primaryEmailAddress?.emailAddress));
+        .where(eq(AIOutput.createdBy, userEmail));
       getTotalUsage(result);
     } catch (error) {
       console.log(error);
