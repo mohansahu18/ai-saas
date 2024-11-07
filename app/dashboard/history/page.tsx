@@ -29,8 +29,8 @@ const History = () => {
           .from(AIOutput)
           .where(
             eq(
-              AIOutput?.createdBy,
-              user?.primaryEmailAddress?.emailAddress || ""
+              AIOutput.createdBy,
+              user?.primaryEmailAddress?.emailAddress ?? ""
             )
           )
           .orderBy(desc(AIOutput?.id));
