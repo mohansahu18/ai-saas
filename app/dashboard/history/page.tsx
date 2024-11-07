@@ -24,15 +24,15 @@ const History = () => {
   const fetchHistory = async () => {
     if (user?.primaryEmailAddress?.emailAddress) {
       try {
+        const userEmail = user?.primaryEmailAddress?.emailAddress;
+        if (!userEmail) {
+          console.error("User email is not available.");
+          return; // Exit if no email is available
+        }
         const fetchedHistory: HISTORY[] = await db
           .select()
           .from(AIOutput)
-          .where(
-            eq(
-              AIOutput.createdBy,
-              user?.primaryEmailAddress?.emailAddress ?? ""
-            )
-          )
+          .where(eq(AIOutput.createdBy, userEmail))
           .orderBy(desc(AIOutput?.id));
 
         setHistoryList(fetchedHistory);
