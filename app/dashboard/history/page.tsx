@@ -17,64 +17,64 @@ export interface HISTORY {
 }
 
 const History = () => {
-  // const { user } = useUser();
-  // const [historyList, setHistoryList] = useState<HISTORY[]>([]);
-  // const [loading, setLoading] = useState<boolean>(true);
+  const { user } = useUser();
+  const [historyList, setHistoryList] = useState<HISTORY[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
-  // const fetchHistory = async () => {
-  //   if (user?.primaryEmailAddress?.emailAddress) {
-  //     try {
-  //       const userEmail = user?.primaryEmailAddress?.emailAddress;
-  //       if (!userEmail) {
-  //         console.error("User email is not available.");
-  //         return; // Exit if no email is available
-  //       }
-  //       const fetchedHistory: HISTORY[] = await db
-  //         .select()
-  //         .from(AIOutput)
-  //         .where(eq(AIOutput.createdBy, userEmail))
-  //         .orderBy(desc(AIOutput?.id));
+  const fetchHistory = async () => {
+    if (user?.primaryEmailAddress?.emailAddress) {
+      try {
+        const userEmail = user?.primaryEmailAddress?.emailAddress;
+        if (!userEmail) {
+          console.error("User email is not available.");
+          return; // Exit if no email is available
+        }
+        const fetchedHistory: HISTORY[] = await db
+          .select()
+          .from(AIOutput)
+          .where(eq(AIOutput.createdBy, userEmail))
+          .orderBy(desc(AIOutput?.id));
 
-  //       setHistoryList(fetchedHistory);
-  //     } catch (error) {
-  //       console.error("Failed to fetch history:", error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   }
-  // };
-  // useEffect(() => {
-  //   fetchHistory();
-  // }, [user]);
+        setHistoryList(fetchedHistory);
+      } catch (error) {
+        console.error("Failed to fetch history:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+  useEffect(() => {
+    fetchHistory();
+  }, [user]);
 
-  // const GetTemplateName = (slug: string) => {
-  //   const template = Templates.find((item) => item.slug === slug);
-  //   return template?.name || "Unknown Template"; // Adjust based on your template structure
-  // };
+  const GetTemplateName = (slug: string) => {
+    const template = Templates.find((item) => item.slug === slug);
+    return template?.name || "Unknown Template"; // Adjust based on your template structure
+  };
 
-  // if (loading) {
-  //   return <div>Loading...</div>;
-  // }
-  // const truncateText = (text, maxWords = 20) => {
-  //   const words = text.split(" ");
-  //   if (words.length <= maxWords) {
-  //     return text;
-  //   }
-  //   return `${words.slice(0, maxWords).join(" ")}...`;
-  // };
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  const truncateText = (text, maxWords = 20) => {
+    const words = text.split(" ");
+    if (words.length <= maxWords) {
+      return text;
+    }
+    return `${words.slice(0, maxWords).join(" ")}...`;
+  };
 
-  // const formatDate = (dateString) => {
-  //   const date = new Date(dateString);
-  //   return date.toLocaleDateString();
-  // };
-  // const getWordCount = (text) => {
-  //   return text.split(" ").length;
-  // };
-  // console.log(historyList, "historyList");
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString();
+  };
+  const getWordCount = (text) => {
+    return text.split(" ").length;
+  };
+  console.log(historyList, "historyList");
 
   return (
     <div className="m-2 p-5 rounded-md bg-white border">
-      {/* <h2 className="font-bold">History</h2>
+      <h2 className="font-bold">History</h2>
       {historyList.length > 0 ? (
         <div className="overflow-x-auto">
           <table className="w-full border-collapse">
@@ -110,8 +110,7 @@ const History = () => {
         </div>
       ) : (
         <p className="text-center text-gray-500">No history found</p>
-      )} */}
-      history
+      )}
     </div>
   );
 };
