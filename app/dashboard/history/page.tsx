@@ -28,9 +28,12 @@ const History = () => {
           .select()
           .from(AIOutput)
           .where(
-            eq(AIOutput.createdBy, user.primaryEmailAddress.emailAddress || "")
+            eq(
+              AIOutput?.createdBy,
+              user?.primaryEmailAddress?.emailAddress || ""
+            )
           )
-          .orderBy(desc(AIOutput.id));
+          .orderBy(desc(AIOutput?.id));
 
         setHistoryList(fetchedHistory);
       } catch (error) {
