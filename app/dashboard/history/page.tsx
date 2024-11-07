@@ -10,10 +10,10 @@ import { AIOutput } from "@/app/utils/schema";
 export interface HISTORY {
   id: number;
   formData: string;
-  aiResponse: string;
+  aiResponse: string | null;
   templateSlug: string;
   createdBy: string;
-  createdAt: string;
+  createdAt: Date | null;
 }
 
 const History = () => {
@@ -24,11 +24,16 @@ const History = () => {
   const fetchHistory = async () => {
     if (user?.primaryEmailAddress?.emailAddress) {
       try {
+        const userEmail = user?.primaryEmailAddress?.emailAddress;
+        if (!userEmail) {
+          console.error("User email is not available.");
+          return; // Exit if no email is available
+        }
         const fetchedHistory: HISTORY[] = await db
           .select()
           .from(AIOutput)
-          .where(eq(AIOutput.createdBy, user.primaryEmailAddress.emailAddress))
-          .orderBy(desc(AIOutput.id));
+          .where(eq(AIOutput.createdBy, userEmail))
+          .orderBy(desc(AIOutput?.id));
 
         setHistoryList(fetchedHistory);
       } catch (error) {
