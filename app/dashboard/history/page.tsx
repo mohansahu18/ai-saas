@@ -10,10 +10,10 @@ import { AIOutput } from "@/app/utils/schema";
 export interface HISTORY {
   id: number;
   formData: string;
-  aiResponse: string;
+  aiResponse: string | null;
   templateSlug: string;
   createdBy: string;
-  createdAt: string;
+  createdAt: string | null;
 }
 
 const History = () => {
