@@ -55,7 +55,7 @@ const History = () => {
   if (loading) {
     return <div>Loading...</div>;
   }
-  const truncateText = (text, maxWords = 20) => {
+  const truncateText = (text: string, maxWords = 20) => {
     const words = text.split(" ");
     if (words.length <= maxWords) {
       return text;
@@ -63,11 +63,11 @@ const History = () => {
     return `${words.slice(0, maxWords).join(" ")}...`;
   };
 
-  const formatDate = (dateString) => {
+  const formatDate = (dateString: any) => {
     const date = new Date(dateString);
     return date.toLocaleDateString();
   };
-  const getWordCount = (text) => {
+  const getWordCount = (text: string) => {
     return text.split(" ").length;
   };
   console.log(historyList, "historyList");
@@ -91,18 +91,20 @@ const History = () => {
               {historyList.map((item) => (
                 <tr key={item.id} className="mb-4">
                   <td className="p-2 border font-medium">
-                    {GetTemplateName(item.templateSlug)}
+                    {GetTemplateName(item?.templateSlug)}
                   </td>
                   <td className="p-2 border">
-                    {JSON.parse(item.formData).niche || "N/A"}
+                    {JSON.parse(item?.formData).niche || "N/A"}
                   </td>
                   <td className="p-2 border max-w-[300px] truncate">
-                    {truncateText(item.aiResponse, 20)}
+                    {item?.aiResponse && truncateText(item?.aiResponse, 20)}
                   </td>
                   <td className="p-2 border">
-                    {getWordCount(item.aiResponse)}
+                    {item?.aiResponse && getWordCount(item?.aiResponse)}
                   </td>
-                  <td className="p-2 border">{formatDate(item.createdAt)}</td>
+                  <td className="p-2 border">
+                    {item?.createdAt && formatDate(item?.createdAt)}
+                  </td>
                 </tr>
               ))}
             </tbody>

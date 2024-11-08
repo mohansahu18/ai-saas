@@ -68,7 +68,7 @@ const Billing = () => {
         userName: user?.fullName,
         active: true,
         paymentId: paymentId,
-        joinDate: Date.now(),
+        joinDate: new Date().toISOString(),
       });
       if (result) {
         window.location.reload();
