@@ -65,12 +65,23 @@ const CreateNewContent = (props: PROPS) => {
 
   const saveInDb = async (fromData: any, slug: any, aiResp: string) => {
     try {
+      const formData = fromData ? JSON.stringify(fromData) : "";
+      const templateSlug = slug ?? "";
+      const aiResponse = aiResp ?? "";
+
       const result = await db.insert(AIOutput).values({
-        formData: fromData,
-        templateSlug: slug,
-        aiResponse: aiResp,
-        createdBy: user?.primaryEmailAddress?.emailAddress,
+        formData: formData,
+        templateSlug: templateSlug,
+        aiResponse: aiResponse,
+        createdBy: user?.primaryEmailAddress?.emailAddress ?? "", // Ensure createdBy is a valid string
       });
+
+      // const result = await db.insert(AIOutput).values({
+      //   formData: fromData,
+      //   templateSlug: slug,
+      //   aiResponse: aiResp,
+      //   createdBy: user?.primaryEmailAddress?.emailAddress,
+      // });
       console.log(result);
     } catch (error) {
       console.log(error);
