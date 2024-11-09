@@ -1,7 +1,7 @@
 export default [
   {
     name: "Blog Title",
-    desc: "An AI tool that generate blog title depends on yout blog information",
+    desc: "An AI tool that generate blog title depends on your blog information",
     category: "Blog",
     icon: "https://cdn-icons-png.flaticon.com/128/4186/4186534.png",
     aiPrompt:
@@ -60,74 +60,6 @@ export default [
       },
     ],
   },
-  {
-    name: "Youtube SEO Title",
-    desc: "An AI tool that serves as your personal blog post title writer, generating catchy and viral-worthy titles in your chosen language.",
-    category: "Youtube Tools",
-    icon: "https://cdn-icons-png.flaticon.com/128/402/402075.png",
-    slug: "youtube-seo-title",
-    aiPrompt:
-      "Give me Best SEO optimized high ranked 5 title ideas bullet wise only bases on keywords and outline and give me result in HTML tags format",
-    form: [
-      {
-        label: "Enter your youtube video topic keyowords",
-        field: "input",
-        name: "keywords",
-        required: true,
-      },
-      {
-        label: "Enter youtube description Outline here",
-        field: "textarea",
-        name: "outline",
-      },
-    ],
-  },
-  {
-    name: "Youtube Description",
-    desc: "An AI tool that serves as your personal blog post title writer, generating catchy and viral-worthy titles in your chosen language.",
-    category: "Youtube Tool",
-    icon: "https://cdn-icons-png.flaticon.com/128/2111/2111748.png",
-    slug: "youtube-description",
-    aiPrompt:
-      "Generate Youtube description with emoji under 4-5 lines based on topic and outline in rich text editor format",
-    form: [
-      {
-        label: "Enter your blog topic/title",
-        field: "input",
-        name: "topic",
-        required: true,
-      },
-      {
-        label: "Enter youtube Outline here",
-        field: "textarea",
-        name: "outline",
-      },
-    ],
-  },
-  {
-    name: "Youtube Tags",
-    desc: "An AI tool that serves as your personal blog post title writer, generating catchy and viral-worthy titles in your chosen language.",
-    category: "Youtube Tool",
-    icon: "https://cdn-icons-png.flaticon.com/128/4674/4674918.png",
-    slug: "youtube-tag",
-
-    aiPrompt:
-      "Generate 10 Youtube tags in bullet point based on title and outline in rich text editor format",
-
-    form: [
-      {
-        label: "Enter your youtube title",
-        field: "input",
-        name: "title",
-        required: true,
-      },
-      {
-        label: "Enter youtube video Outline here (Optional)",
-        field: "textarea",
-        name: "outline",
-      },
-    ],
-  },
 
   {
     name: "Rewrite Article (Plagiarism Free)",
@@ -165,7 +97,7 @@ export default [
   },
   {
     name: "Add Emojis to Text",
-    desc: "An AI tool that serves as your personal blog post title writer, generating catchy and viral-worthy titles in your chosen language.",
+    desc: "Transform plain text into expressive messages with our AI emoji enhancement tool. Automatically adds relevant emojis to make your writing more engaging 📝✨.",
     icon: "https://cdn-icons-png.flaticon.com/128/2584/2584606.png",
     category: "blog",
     slug: "add-emoji-to-text",
@@ -182,7 +114,7 @@ export default [
   },
   {
     name: "Instagram Post Generator",
-    desc: "An AI tool that serves as your personal blog post title writer, generating catchy and viral-worthy titles in your chosen language.",
+    desc: "Create eye-catching Instagram posts instantly with AI-powered content generation 📱✨",
     icon: "https://cdn-icons-png.flaticon.com/128/15713/15713420.png",
     category: "blog",
 
@@ -200,7 +132,7 @@ export default [
   },
   {
     name: "Instagram Hash Tag Generator",
-    desc: "An AI tool that serves as your personal blog post title writer, generating catchy and viral-worthy titles in your chosen language.",
+    desc: "Boost your Instagram reach with our smart hashtag generator. Get relevant, trending hashtags instantly to maximize your post visibility and engagement 🎯📈",
     icon: "https://cdn-icons-png.flaticon.com/128/7045/7045432.png",
     category: "blog",
 
